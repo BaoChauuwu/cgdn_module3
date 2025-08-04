@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="d95e345e-0ac3-46f0-b1ca-3cc10ca6f803" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/gradle.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/gradlew" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/gradlew.bat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/settings.gradle" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/chaudnb/example/demo3/HelloServlet.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/web.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/index.jsp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../demo_module3/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../demo_module3/.idea/artifacts/Gradle___chaudnb_example___demo_module3_1_0_SNAPSHOT_war.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../demo_module3/.idea/artifacts/Gradle___chaudnb_example___demo_module3_1_0_SNAPSHOT_war__exploded_.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../demo_module3/.idea/compiler.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../demo_module3/.idea/gradle.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../demo_module3/.idea/libraries/Gradle__javax_servlet_javax_servlet_api_4_0_1.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../demo_module3/.idea/libraries/Gradle__org_apiguardian_apiguardian_api_1_1_2.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../demo_module3/.idea/libraries/Gradle__org_junit_jupiter_junit_jupiter_api_5_10_2.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../demo_module3/.idea/libraries/Gradle__org_junit_jupiter_junit_jupiter_engine_5_10_2.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../demo_module3/.idea/libraries/Gradle__org_junit_platform_junit_platform_commons_1_10_2.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../demo_module3/.idea/libraries/Gradle__org_junit_platform_junit_platform_engine_1_10_2.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../demo_module3/.idea/libraries/Gradle__org_opentest4j_opentest4j_1_3_0.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../demo_module3/.idea/misc.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../demo_module3/.idea/modules.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../demo_module3/.idea/modules/demo_module3.main.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../demo_module3/.idea/modules/demo_module3.test.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../demo_module3/.idea/vcs.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../demo_module3/demo_module3.iml" beforeDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ExternalProjectsData">
+    <projectState path="$PROJECT_DIR$">
+      <ProjectState />
+    </projectState>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="LogFilters">
+    <option name="FILTER_ERRORS" value="false" />
+    <option name="FILTER_WARNINGS" value="false" />
+    <option name="FILTER_INFO" value="true" />
+    <option name="FILTER_DEBUG" value="true" />
+    <option name="CUSTOM_FILTER" />
+  </component>
+  <component name="ProjectColorInfo"><![CDATA[{
+  "associatedIndex": 0
+}]]></component>
+  <component name="ProjectId" id="30p9WmJICEaCRatpbgDpn7bww53" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Gradle.Build demo3.executor": "Run",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "Tomcat Server.Tomcat 9.0.107.executor": "Run",
+    "git-widget-placeholder": "main",
+    "kotlin-language-version-configured": "true",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "vue.rearranger.settings.migration": "true"
+  }
+}]]></component>
+  <component name="RunManager">
+    <configuration name="Tomcat 9.0.107" type="#com.intellij.j2ee.web.tomcat.TomcatRunConfigurationFactory" factoryName="Local" APPLICATION_SERVER_NAME="Tomcat 9.0.107" ALTERNATIVE_JRE_ENABLED="false">
+      <option name="UPDATING_POLICY" value="hot-swap-classes" />
+      <deployment>
+        <artifact name="Gradle : chaudnb.example : demo3-1.0-SNAPSHOT.war">
+          <settings>
+            <option name="CONTEXT_PATH" value="" />
+          </settings>
+        </artifact>
+      </deployment>
+      <server-settings>
+        <option name="BASE_DIRECTORY_NAME" value="8459a350-4221-404d-bfc7-4710ed3680ca" />
+      </server-settings>
+      <predefined_log_file enabled="true" id="Tomcat" />
+      <predefined_log_file enabled="true" id="Tomcat Catalina" />
+      <predefined_log_file id="Tomcat Manager" />
+      <predefined_log_file id="Tomcat Host Manager" />
+      <predefined_log_file id="Tomcat Localhost Access" />
+      <RunnerSettings RunnerId="Debug">
+        <option name="DEBUG_PORT" value="52583" />
+      </RunnerSettings>
+      <ConfigurationWrapper VM_VAR="JAVA_OPTS" RunnerId="Cover">
+        <option name="USE_ENV_VARIABLES" value="true" />
+        <STARTUP>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </STARTUP>
+        <SHUTDOWN>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </SHUTDOWN>
+      </ConfigurationWrapper>
+      <ConfigurationWrapper VM_VAR="JAVA_OPTS" RunnerId="Debug">
+        <option name="USE_ENV_VARIABLES" value="true" />
+        <STARTUP>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </STARTUP>
+        <SHUTDOWN>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </SHUTDOWN>
+      </ConfigurationWrapper>
+      <ConfigurationWrapper VM_VAR="JAVA_OPTS" RunnerId="Profile">
+        <option name="USE_ENV_VARIABLES" value="true" />
+        <STARTUP>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </STARTUP>
+        <SHUTDOWN>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </SHUTDOWN>
+      </ConfigurationWrapper>
+      <ConfigurationWrapper VM_VAR="JAVA_OPTS" RunnerId="Run">
+        <option name="USE_ENV_VARIABLES" value="true" />
+        <STARTUP>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </STARTUP>
+        <SHUTDOWN>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </SHUTDOWN>
+      </ConfigurationWrapper>
+      <method v="2">
+        <option name="Make" enabled="true" />
+        <option name="BuildArtifacts" enabled="true">
+          <artifact name="Gradle : chaudnb.example : demo3-1.0-SNAPSHOT.war" />
+        </option>
+      </method>
+    </configuration>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-jdk-9823dce3aa75-a94e463ab2e7-intellij.indexing.shared.core-IU-243.25659.59" />
+        <option value="bundled-js-predefined-d6986cc7102b-1632447f56bf-JavaScript-IU-243.25659.59" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="d95e345e-0ac3-46f0-b1ca-3cc10ca6f803" name="Changes" comment="" />
+      <created>1754313682470</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1754313682470</updated>
+      <workItem from="1754313683620" duration="694000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+</project>
