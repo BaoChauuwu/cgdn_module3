@@ -17,5 +17,6 @@
     <input type="text" placeholder="Mời bạn nhập giá" name="price">
     <button type="submit"> Add Product</button>
 </form>
+<p><a href="/product">Quay lại danh sách</a></p>
 </body>
 </html>

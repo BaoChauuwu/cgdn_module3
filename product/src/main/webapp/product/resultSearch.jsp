@@ -12,13 +12,29 @@
     <title>Title</title>
 </head>
 <body>
-<h1>Ket qua sao khi search</h1>
-<c:forEach var="product" items="${findProduct}" >
-    <tr>
-    <td> ${product.getName()} </td>
-    <td> ${product.getDescription()} </td>
-    <td> ${product.getPrice()} </td>
-    </tr>
-</c:forEach>
+<h1>Kết quả sau khi search</h1>
+<c:choose>
+    <c:when test="${not empty findProduct}">
+        <table>
+            <tr>
+                <th>Name</th>
+                <th>Description</th>
+                <th>Price</th>
+            </tr>
+            <tr>
+                <td>${findProduct.getName()}</td>
+                <td>${findProduct.getDescription()}</td>
+                <td>${findProduct.getPrice()}</td>
+            </tr>
+        </table>
+        <p>
+            <a href="/product?action=edit&id=${findProduct.getId()}">Edit</a>
+        </p>
+    </c:when>
+    <c:otherwise>
+        <p>Không tìm thấy sản phẩm</p>
+    </c:otherwise>
+</c:choose>
+<p><a href="/product">Quay lại danh sách</a></p>
 </body>
 </html>

@@ -20,12 +20,12 @@ public class ProductService implements IProductService {
 
     @Override
     public Product updateProduct(Product product) {
-        return null;
+        return productRepository.updateProduct(product);
     }
 
     @Override
     public boolean deleteProduct(Product product) {
-        return false;
+        return productRepository.deleteProduct(product);
     }
 
     @Override

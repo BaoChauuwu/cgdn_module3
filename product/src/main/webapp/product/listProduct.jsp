@@ -36,6 +36,13 @@
             <td>${product.getName()}</td>
             <td>${product.getDescription()}</td>
             <td>${product.getPrice()}</td>
+            <td>
+                <a href="/product?action=edit&id=${product.getId()}">Edit</a>
+                <form action="/product?action=delete" method="post" style="display:inline">
+                    <input type="hidden" name="id" value="${product.getId()}">
+                    <button type="submit" onclick="return confirm('Xóa sản phẩm này?')">Delete</button>
+                </form>
+            </td>
         </tr>
     </c:forEach>
 </table>

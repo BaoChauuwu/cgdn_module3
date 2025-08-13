@@ -36,13 +36,26 @@ public class ProductController extends HttpServlet {
             case "find":
                 int id = Integer.parseInt(req.getParameter("id"));
                 Product findProduct = productService.findProductById(id);
-                if (findProduct != null) {
-                    req.setAttribute("findProduct", findProduct);
-                    req.getRequestDispatcher("/product/resultSearch.jsp").forward(req, resp);
-                }
+                req.setAttribute("findProduct", findProduct);
+                req.getRequestDispatcher("/product/resultSearch.jsp").forward(req, resp);
                 break;
 
+            case "update":
+                int updateId = Integer.parseInt(req.getParameter("id"));
+                String updateName = req.getParameter("name");
+                String updateDescription = req.getParameter("description");
+                double updatePrice = Double.parseDouble(req.getParameter("price"));
+                Product updated = new Product(updateId, updateName, updateDescription, updatePrice);
+                productService.updateProduct(updated);
+                resp.sendRedirect("/product");
+                break;
 
+            case "delete":
+                int deleteId = Integer.parseInt(req.getParameter("id"));
+                Product deleteProduct = productService.findProductById(deleteId);
+                productService.deleteProduct(deleteProduct);
+                resp.sendRedirect("/product");
+                break;
         }
     }
 
@@ -55,6 +68,19 @@ public class ProductController extends HttpServlet {
         switch (action) {
             case "add":
                 req.getRequestDispatcher("/product/addForm.jsp").forward(req, resp);
+                break;
+            case "edit":
+                int id = Integer.parseInt(req.getParameter("id"));
+                Product product = productService.findProductById(id);
+                req.setAttribute("product", product);
+                req.getRequestDispatcher("/product/editForm.jsp").forward(req, resp);
+                break;
+            case "delete":
+                int deleteId = Integer.parseInt(req.getParameter("id"));
+                Product deleteProduct = productService.findProductById(deleteId);
+                productService.deleteProduct(deleteProduct);
+                resp.sendRedirect("/product");
+                break;
             default:
                 List<Product> productList = productService.findAll();
                 req.setAttribute("productList", productList);
