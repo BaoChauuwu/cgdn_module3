@@ -2,75 +2,156 @@ package chaudnb.example.product.repository;
 
 import chaudnb.example.product.model.Product;
 
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
 public class ProductRepository implements IProductRepository {
 
-    public static List<Product> products = new ArrayList<>();
-
-    static {
-        products.add(new Product(1, "Laptop Dell XPS 13", "Ultrabook cao cấp, mỏng nhẹ", 29999.99));
-        products.add(new Product(2, "iPhone 15 Pro", "Smartphone cao cấp của Apple", 34999.00));
-        products.add(new Product(3, "Tai nghe Sony WH-1000XM5", "Tai nghe chống ồn hàng đầu", 8999.50));
-        products.add(new Product(4, "Bàn phím cơ Keychron K8", "Bàn phím cơ không dây, hot-swappable", 2599.00));
-        products.add(new Product(5, "Màn hình LG UltraWide 34\"", "Màn hình cong UltraWide cho đa nhiệm", 12999.99));
-    }
-
     @Override
     public List<Product> findAll() {
+        List<Product> products = new ArrayList<>();
+        String sql = "SELECT * FROM products ORDER BY id";
+        
+        try (Connection connection = BaseRepository.getConnectDB();
+             PreparedStatement statement = connection.prepareStatement(sql);
+             ResultSet resultSet = statement.executeQuery()) {
+            
+            while (resultSet.next()) {
+                Product product = new Product();
+                product.setId(resultSet.getInt("id"));
+                product.setName(resultSet.getString("name"));
+                product.setDescription(resultSet.getString("description"));
+                product.setPrice(resultSet.getDouble("price"));
+                products.add(product);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        
         return products;
     }
 
     @Override
     public boolean addProduct(Product product) {
-        if (product.getId() == 0) {
-            int nextId = 1;
-            for (Product p : products) {
-                if (p.getId() >= nextId) {
-                    nextId = p.getId() + 1;
+        String sql = "INSERT INTO products (name, description, price) VALUES (?, ?, ?)";
+        
+        try (Connection connection = BaseRepository.getConnectDB();
+             PreparedStatement statement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
+            
+            statement.setString(1, product.getName());
+            statement.setString(2, product.getDescription());
+            statement.setDouble(3, product.getPrice());
+            
+            int affectedRows = statement.executeUpdate();
+            
+            if (affectedRows > 0) {
+                try (ResultSet generatedKeys = statement.getGeneratedKeys()) {
+                    if (generatedKeys.next()) {
+                        product.setId(generatedKeys.getInt(1));
+                    }
                 }
+                return true;
             }
-            product.setId(nextId);
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
-        return products.add(product);
+        
+        return false;
     }
 
     @Override
     public Product updateProduct(Product product) {
-        for (int i = 0; i < products.size(); i++) {
-            Product current = products.get(i);
-            if (current.getId() == product.getId()) {
-                current.setName(product.getName());
-                current.setDescription(product.getDescription());
-                current.setPrice(product.getPrice());
-                return current;
+        String sql = "UPDATE products SET name = ?, description = ?, price = ? WHERE id = ?";
+        
+        try (Connection connection = BaseRepository.getConnectDB();
+             PreparedStatement statement = connection.prepareStatement(sql)) {
+            
+            statement.setString(1, product.getName());
+            statement.setString(2, product.getDescription());
+            statement.setDouble(3, product.getPrice());
+            statement.setInt(4, product.getId());
+            
+            int affectedRows = statement.executeUpdate();
+            
+            if (affectedRows > 0) {
+                return product;
             }
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
+        
         return null;
     }
 
     @Override
     public boolean deleteProduct(Product product) {
-        if (product == null) {
-            return false;
+        String sql = "DELETE FROM products WHERE id = ?";
+        
+        try (Connection connection = BaseRepository.getConnectDB();
+             PreparedStatement statement = connection.prepareStatement(sql)) {
+            
+            statement.setInt(1, product.getId());
+            
+            int affectedRows = statement.executeUpdate();
+            return affectedRows > 0;
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
-        for (int i = 0; i < products.size(); i++) {
-            if (products.get(i).getId() == product.getId()) {
-                products.remove(i);
-                return true;
-            }
-        }
+        
         return false;
     }
 
     @Override
     public Product findProductById(int id) {
-        for (Product product : products) {
-            if (product.getId() == id) {
-                return product;
+        String sql = "SELECT * FROM products WHERE id = ?";
+        
+        try (Connection connection = BaseRepository.getConnectDB();
+             PreparedStatement statement = connection.prepareStatement(sql)) {
+            
+            statement.setInt(1, id);
+            
+            try (ResultSet resultSet = statement.executeQuery()) {
+                if (resultSet.next()) {
+                    Product product = new Product();
+                    product.setId(resultSet.getInt("id"));
+                    product.setName(resultSet.getString("name"));
+                    product.setDescription(resultSet.getString("description"));
+                    product.setPrice(resultSet.getDouble("price"));
+                    return product;
+                }
             }
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
+        
         return null;
+    }
+
+    @Override
+    public List<Product> searchByName(String name) {
+        List<Product> products = new ArrayList<>();
+        String sql = "SELECT * FROM products WHERE name LIKE ? ORDER BY id";
+        
+        try (Connection connection = BaseRepository.getConnectDB();
+             PreparedStatement statement = connection.prepareStatement(sql)) {
+            
+            statement.setString(1, "%" + name + "%");
+            
+            try (ResultSet resultSet = statement.executeQuery()) {
+                while (resultSet.next()) {
+                    Product product = new Product();
+                    product.setId(resultSet.getInt("id"));
+                    product.setName(resultSet.getString("name"));
+                    product.setDescription(resultSet.getString("description"));
+                    product.setPrice(resultSet.getDouble("price"));
+                    products.add(product);
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        
+        return products;
     }
 }

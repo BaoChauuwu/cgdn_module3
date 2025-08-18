@@ -9,32 +9,88 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Title</title>
+    <title>Kết quả tìm kiếm</title>
+    <style>
+        table { border-collapse: collapse; width: 100%; }
+        th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
+        th { background-color: #f2f2f2; }
+        .search-info { background-color: #e7f3ff; padding: 10px; margin-bottom: 20px; border-radius: 5px; }
+    </style>
 </head>
 <body>
-<h1>Kết quả sau khi search</h1>
-<c:choose>
-    <c:when test="${not empty findProduct}">
-        <table>
+<h1>Kết quả tìm kiếm</h1>
+
+<!-- Hiển thị thông tin tìm kiếm -->
+<c:if test="${not empty searchKeyword}">
+    <div class="search-info">
+        <strong>Từ khóa tìm kiếm:</strong> "${searchKeyword}"
+    </div>
+</c:if>
+
+<!-- Hiển thị kết quả tìm kiếm theo ID (findProduct) -->
+<c:if test="${not empty findProduct}">
+    <h3>Sản phẩm tìm thấy theo ID:</h3>
+    <table>
+        <tr>
+            <th>ID</th>
+            <th>Tên sản phẩm</th>
+            <th>Mô tả</th>
+            <th>Giá</th>
+            <th>Thao tác</th>
+        </tr>
+        <tr>
+            <td>${findProduct.getId()}</td>
+            <td>${findProduct.getName()}</td>
+            <td>${findProduct.getDescription()}</td>
+            <td>$${findProduct.getPrice()}</td>
+            <td>
+                <a href="/product?action=edit&id=${findProduct.getId()}">Sửa</a> |
+                <a href="/product?action=delete&id=${findProduct.getId()}" 
+                   onclick="return confirm('Bạn có chắc muốn xóa sản phẩm này?')">Xóa</a>
+            </td>
+        </tr>
+    </table>
+</c:if>
+
+<!-- Hiển thị kết quả tìm kiếm theo tên (searchResults) -->
+<c:if test="${not empty searchResults}">
+    <h3>Sản phẩm tìm thấy theo tên (${searchResults.size()} kết quả):</h3>
+    <table>
+        <tr>
+            <th>ID</th>
+            <th>Tên sản phẩm</th>
+            <th>Mô tả</th>
+            <th>Giá</th>
+            <th>Thao tác</th>
+        </tr>
+        <c:forEach var="product" items="${searchResults}">
             <tr>
-                <th>Name</th>
-                <th>Description</th>
-                <th>Price</th>
+                <td>${product.getId()}</td>
+                <td>${product.getName()}</td>
+                <td>${product.getDescription()}</td>
+                <td>$${product.getPrice()}</td>
+                <td>
+                    <a href="/product?action=edit&id=${product.getId()}">Sửa</a> |
+                    <a href="/product?action=delete&id=${product.getId()}" 
+                       onclick="return confirm('Bạn có chắc muốn xóa sản phẩm này?')">Xóa</a>
+                </td>
             </tr>
-            <tr>
-                <td>${findProduct.getName()}</td>
-                <td>${findProduct.getDescription()}</td>
-                <td>${findProduct.getPrice()}</td>
-            </tr>
-        </table>
-        <p>
-            <a href="/product?action=edit&id=${findProduct.getId()}">Edit</a>
-        </p>
-    </c:when>
-    <c:otherwise>
-        <p>Không tìm thấy sản phẩm</p>
-    </c:otherwise>
-</c:choose>
-<p><a href="/product">Quay lại danh sách</a></p>
+        </c:forEach>
+    </table>
+</c:if>
+
+<!-- Hiển thị thông báo không tìm thấy -->
+<c:if test="${empty findProduct && empty searchResults}">
+    <div class="search-info">
+        <p><strong>Không tìm thấy sản phẩm nào!</strong></p>
+        <c:if test="${not empty searchKeyword}">
+            <p>Không có sản phẩm nào chứa từ khóa "${searchKeyword}"</p>
+        </c:if>
+    </div>
+</c:if>
+
+<div style="margin-top: 20px;">
+    <a href="/product" style="background-color: #4CAF50; color: white; padding: 10px 15px; text-decoration: none; border-radius: 4px;">← Quay lại danh sách sản phẩm</a>
+</div>
 </body>
 </html>

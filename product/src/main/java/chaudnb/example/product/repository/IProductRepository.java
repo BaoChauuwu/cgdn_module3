@@ -10,4 +10,5 @@ public interface IProductRepository {
     Product updateProduct(Product product);
     boolean deleteProduct(Product product);
     Product findProductById(int id);
+    List<Product> searchByName(String name);
 }

@@ -40,6 +40,14 @@ public class ProductController extends HttpServlet {
                 req.getRequestDispatcher("/product/resultSearch.jsp").forward(req, resp);
                 break;
 
+            case "search":
+                String searchName = req.getParameter("name");
+                List<Product> searchResults = productService.searchByName(searchName);
+                req.setAttribute("searchResults", searchResults);
+                req.setAttribute("searchKeyword", searchName);
+                req.getRequestDispatcher("/product/resultSearch.jsp").forward(req, resp);
+                break;
+
             case "update":
                 int updateId = Integer.parseInt(req.getParameter("id"));
                 String updateName = req.getParameter("name");
