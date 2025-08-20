@@ -6,29 +6,12 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ProductRepository implements IProductRepository {
+public class ProductRepositorySimple implements IProductRepository {
 
     @Override
     public List<Product> findAll() {
         List<Product> products = new ArrayList<>();
-        // Kiểm tra xem bảng categories có tồn tại không
-        String sql;
-        try (Connection connection = BaseRepository.getConnectDB()) {
-            // Kiểm tra xem cột category_id có tồn tại không
-            DatabaseMetaData metaData = connection.getMetaData();
-            ResultSet columns = metaData.getColumns(null, null, "products", "category_id");
-            
-            if (columns.next()) {
-                // Nếu cột category_id tồn tại, sử dụng JOIN
-                sql = "SELECT p.*, c.name as category_name FROM products p LEFT JOIN categories c ON p.category_id = c.id ORDER BY p.id";
-            } else {
-                // Nếu không, chỉ lấy dữ liệu từ bảng products
-                sql = "SELECT * FROM products ORDER BY id";
-            }
-        } catch (SQLException e) {
-            // Nếu có lỗi, dùng query đơn giản
-            sql = "SELECT * FROM products ORDER BY id";
-        }
+        String sql = "SELECT * FROM products ORDER BY id";
         
         try (Connection connection = BaseRepository.getConnectDB();
              PreparedStatement statement = connection.prepareStatement(sql);
@@ -40,16 +23,6 @@ public class ProductRepository implements IProductRepository {
                 product.setName(resultSet.getString("name"));
                 product.setDescription(resultSet.getString("description"));
                 product.setPrice(resultSet.getDouble("price"));
-                
-                // Chỉ set category info nếu cột tồn tại
-                try {
-                    product.setCategoryId(resultSet.getInt("category_id"));
-                    product.setCategoryName(resultSet.getString("category_name"));
-                } catch (SQLException e) {
-                    // Nếu cột không tồn tại, bỏ qua
-                    product.setCategoryId(0);
-                    product.setCategoryName(null);
-                }
                 products.add(product);
             }
         } catch (SQLException e) {
@@ -61,24 +34,7 @@ public class ProductRepository implements IProductRepository {
 
     @Override
     public boolean addProduct(Product product) {
-        // Kiểm tra xem cột category_id có tồn tại không
-        String sql;
-        boolean hasCategoryColumn = false;
-        
-        try (Connection connection = BaseRepository.getConnectDB()) {
-            DatabaseMetaData metaData = connection.getMetaData();
-            ResultSet columns = metaData.getColumns(null, null, "products", "category_id");
-            hasCategoryColumn = columns.next();
-        } catch (SQLException e) {
-            // Nếu có lỗi, giả định không có cột category_id
-            hasCategoryColumn = false;
-        }
-        
-        if (hasCategoryColumn) {
-            sql = "INSERT INTO products (name, description, price, category_id) VALUES (?, ?, ?, ?)";
-        } else {
-            sql = "INSERT INTO products (name, description, price) VALUES (?, ?, ?)";
-        }
+        String sql = "INSERT INTO products (name, description, price) VALUES (?, ?, ?)";
         
         try (Connection connection = BaseRepository.getConnectDB();
              PreparedStatement statement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
@@ -86,14 +42,6 @@ public class ProductRepository implements IProductRepository {
             statement.setString(1, product.getName());
             statement.setString(2, product.getDescription());
             statement.setDouble(3, product.getPrice());
-            
-            if (hasCategoryColumn) {
-                if (product.getCategoryId() > 0) {
-                    statement.setInt(4, product.getCategoryId());
-                } else {
-                    statement.setNull(4, Types.INTEGER);
-                }
-            }
             
             int affectedRows = statement.executeUpdate();
             
@@ -114,7 +62,7 @@ public class ProductRepository implements IProductRepository {
 
     @Override
     public Product updateProduct(Product product) {
-        String sql = "UPDATE products SET name = ?, description = ?, price = ?, category_id = ? WHERE id = ?";
+        String sql = "UPDATE products SET name = ?, description = ?, price = ? WHERE id = ?";
         
         try (Connection connection = BaseRepository.getConnectDB();
              PreparedStatement statement = connection.prepareStatement(sql)) {
@@ -122,12 +70,7 @@ public class ProductRepository implements IProductRepository {
             statement.setString(1, product.getName());
             statement.setString(2, product.getDescription());
             statement.setDouble(3, product.getPrice());
-            if (product.getCategoryId() > 0) {
-                statement.setInt(4, product.getCategoryId());
-            } else {
-                statement.setNull(4, Types.INTEGER);
-            }
-            statement.setInt(5, product.getId());
+            statement.setInt(4, product.getId());
             
             int affectedRows = statement.executeUpdate();
             
@@ -161,7 +104,7 @@ public class ProductRepository implements IProductRepository {
 
     @Override
     public Product findProductById(int id) {
-        String sql = "SELECT p.*, c.name as category_name FROM products p LEFT JOIN categories c ON p.category_id = c.id WHERE p.id = ?";
+        String sql = "SELECT * FROM products WHERE id = ?";
         
         try (Connection connection = BaseRepository.getConnectDB();
              PreparedStatement statement = connection.prepareStatement(sql)) {
@@ -175,8 +118,6 @@ public class ProductRepository implements IProductRepository {
                     product.setName(resultSet.getString("name"));
                     product.setDescription(resultSet.getString("description"));
                     product.setPrice(resultSet.getDouble("price"));
-                    product.setCategoryId(resultSet.getInt("category_id"));
-                    product.setCategoryName(resultSet.getString("category_name"));
                     return product;
                 }
             }
@@ -190,7 +131,7 @@ public class ProductRepository implements IProductRepository {
     @Override
     public List<Product> searchByName(String name) {
         List<Product> products = new ArrayList<>();
-        String sql = "SELECT p.*, c.name as category_name FROM products p LEFT JOIN categories c ON p.category_id = c.id WHERE p.name LIKE ? ORDER BY p.id";
+        String sql = "SELECT * FROM products WHERE name LIKE ? ORDER BY id";
         
         try (Connection connection = BaseRepository.getConnectDB();
              PreparedStatement statement = connection.prepareStatement(sql)) {
@@ -204,8 +145,6 @@ public class ProductRepository implements IProductRepository {
                     product.setName(resultSet.getString("name"));
                     product.setDescription(resultSet.getString("description"));
                     product.setPrice(resultSet.getDouble("price"));
-                    product.setCategoryId(resultSet.getInt("category_id"));
-                    product.setCategoryName(resultSet.getString("category_name"));
                     products.add(product);
                 }
             }
@@ -215,4 +154,4 @@ public class ProductRepository implements IProductRepository {
         
         return products;
     }
-}
+} 

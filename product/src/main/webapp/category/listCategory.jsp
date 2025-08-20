@@ -1,15 +1,8 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%--
-  Created by IntelliJ IDEA.
-  User: LENOVO
-  Date: 8/8/2025
-  Time: 8:18 PM
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Quản lý sản phẩm</title>
+    <title>Quản lý danh mục</title>
     <style>
         body { font-family: Arial, sans-serif; margin: 20px; }
         table { border-collapse: collapse; width: 100%; margin-top: 20px; }
@@ -45,71 +38,61 @@
 </div>
 
 <div class="header">
-    <h1>Quản lý sản phẩm</h1>
-    <a href="/product?action=add" class="btn">+ Thêm sản phẩm mới</a>
+    <h1>Quản lý danh mục</h1>
+    <a href="/category?action=add" class="btn">+ Thêm danh mục mới</a>
 </div>
 
 <div class="search-container">
     <div class="search-form">
-        <form action="/product" method="post" style="display: inline;">
+        <form action="/category" method="post" style="display: inline;">
             <input type="hidden" name="action" value="find">
             <label><strong>Tìm kiếm theo ID:</strong></label><br>
-            <input type="number" name="id" placeholder="Nhập ID sản phẩm" min="1">
+            <input type="number" name="id" placeholder="Nhập ID danh mục" min="1">
             <button type="submit" class="btn">Tìm theo ID</button>
         </form>
     </div>
     
     <div class="search-form">
-        <form action="/product" method="post" style="display: inline;">
+        <form action="/category" method="post" style="display: inline;">
             <input type="hidden" name="action" value="search">
             <label><strong>Tìm kiếm theo tên:</strong></label><br>
-            <input type="text" name="name" placeholder="Nhập tên sản phẩm">
+            <input type="text" name="name" placeholder="Nhập tên danh mục">
             <button type="submit" class="btn">Tìm theo tên</button>
         </form>
     </div>
 </div>
 
-<c:choose>
-    <c:when test="${not empty productList}">
-        <table>
-            <tr>
-                <th>ID</th>
-                <th>Tên sản phẩm</th>
-                <th>Mô tả</th>
-                <th>Giá ($)</th>
-                <th>Thao tác</th>
-            </tr>
+<table>
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Tên danh mục</th>
+        <th>Mô tả</th>
+        <th>Thao tác</th>
+    </tr>
+    </thead>
+    <tbody>
+    <c:forEach var="category" items="${categoryList}">
+        <tr>
+            <td>${category.getId()}</td>
+            <td>${category.getName()}</td>
+            <td>${category.getDescription()}</td>
+            <td class="actions">
+                <a href="/category?action=edit&id=${category.getId()}" class="btn btn-warning">Sửa</a>
+                <a href="/category?action=delete&id=${category.getId()}" 
+                   class="btn btn-danger"
+                   onclick="return confirm('Bạn có chắc chắn muốn xóa danh mục ${category.getName()}?')">Xóa</a>
+            </td>
+        </tr>
+    </c:forEach>
+    </tbody>
+</table>
 
-            <c:forEach var="product" items="${productList}">
-                <tr>
-                    <td>${product.getId()}</td>
-                    <td>${product.getName()}</td>
-                    <td>${product.getDescription()}</td>
-                    <td>$${product.getPrice()}</td>
-                    <td class="actions">
-                        <a href="/product?action=edit&id=${product.getId()}" class="btn btn-warning">Sửa</a>
-                        <form action="/product" method="post" style="display:inline; margin-left: 5px;">
-                            <input type="hidden" name="action" value="delete">
-                            <input type="hidden" name="id" value="${product.getId()}">
-                            <button type="submit" class="btn btn-danger" onclick="return confirm('Bạn có chắc muốn xóa sản phẩm này?')">Xóa</button>
-                        </form>
-                    </td>
-                </tr>
-            </c:forEach>
-        </table>
-        
-        <div style="margin-top: 20px;">
-            <p><strong>Tổng số sản phẩm:</strong> ${productList.size()}</p>
-        </div>
-    </c:when>
-    <c:otherwise>
-        <div style="text-align: center; padding: 40px; background-color: #f9f9f9; border-radius: 5px;">
-            <h3>Chưa có sản phẩm nào</h3>
-            <p>Hãy thêm sản phẩm đầu tiên để bắt đầu!</p>
-            <a href="/product?action=add" class="btn">+ Thêm sản phẩm đầu tiên</a>
-        </div>
-    </c:otherwise>
-</c:choose>
+<c:if test="${empty categoryList}">
+    <p style="text-align: center; margin-top: 50px; font-size: 18px; color: #888;">
+        Không có danh mục nào. <a href="/category?action=add" class="btn">Thêm danh mục đầu tiên</a>
+    </p>
+</c:if>
 
 </body>
-</html>
+</html> 

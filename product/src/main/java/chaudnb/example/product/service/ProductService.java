@@ -2,12 +2,12 @@ package chaudnb.example.product.service;
 
 import chaudnb.example.product.model.Product;
 import chaudnb.example.product.repository.IProductRepository;
-import chaudnb.example.product.repository.ProductRepository;
+import chaudnb.example.product.repository.ProductRepositorySimple;
 
 import java.util.List;
 
 public class ProductService implements IProductService {
-    private IProductRepository productRepository = new ProductRepository();
+    private IProductRepository productRepository = new ProductRepositorySimple();
     @Override
     public List<Product> findAll() {
         return productRepository.findAll();

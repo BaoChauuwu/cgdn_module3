@@ -15,9 +15,18 @@
         th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
         th { background-color: #f2f2f2; }
         .search-info { background-color: #e7f3ff; padding: 10px; margin-bottom: 20px; border-radius: 5px; }
+        .nav-links { margin-bottom: 20px; }
+        .nav-links a { margin-right: 15px; padding: 8px 15px; text-decoration: none; background-color: #2196F3; color: white; border-radius: 4px; }
+        .nav-links a:hover { background-color: #0b7dda; }
     </style>
 </head>
 <body>
+
+<div class="nav-links">
+    <a href="/product">Quản lý Sản phẩm</a>
+    <a href="/category">Quản lý Danh mục</a>
+</div>
+
 <h1>Kết quả tìm kiếm</h1>
 
 <!-- Hiển thị thông tin tìm kiếm -->
@@ -36,6 +45,7 @@
             <th>Tên sản phẩm</th>
             <th>Mô tả</th>
             <th>Giá</th>
+            <th>Danh mục</th>
             <th>Thao tác</th>
         </tr>
         <tr>
@@ -43,6 +53,16 @@
             <td>${findProduct.getName()}</td>
             <td>${findProduct.getDescription()}</td>
             <td>$${findProduct.getPrice()}</td>
+            <td>
+                <c:choose>
+                    <c:when test="${not empty findProduct.getCategoryName()}">
+                        ${findProduct.getCategoryName()}
+                    </c:when>
+                    <c:otherwise>
+                        <em>Chưa phân loại</em>
+                    </c:otherwise>
+                </c:choose>
+            </td>
             <td>
                 <a href="/product?action=edit&id=${findProduct.getId()}">Sửa</a> |
                 <a href="/product?action=delete&id=${findProduct.getId()}" 
@@ -61,6 +81,7 @@
             <th>Tên sản phẩm</th>
             <th>Mô tả</th>
             <th>Giá</th>
+            <th>Danh mục</th>
             <th>Thao tác</th>
         </tr>
         <c:forEach var="product" items="${searchResults}">
@@ -69,6 +90,16 @@
                 <td>${product.getName()}</td>
                 <td>${product.getDescription()}</td>
                 <td>$${product.getPrice()}</td>
+                <td>
+                    <c:choose>
+                        <c:when test="${not empty product.getCategoryName()}">
+                            ${product.getCategoryName()}
+                        </c:when>
+                        <c:otherwise>
+                            <em>Chưa phân loại</em>
+                        </c:otherwise>
+                    </c:choose>
+                </td>
                 <td>
                     <a href="/product?action=edit&id=${product.getId()}">Sửa</a> |
                     <a href="/product?action=delete&id=${product.getId()}" 

@@ -5,7 +5,8 @@ public class Product {
     private String name;
     private String description;
     private double price;
-
+    private int categoryId;
+    private String categoryName;
 
     public Product() {
     }
@@ -16,12 +17,26 @@ public class Product {
         this.price = price;
     }
 
+    public Product(String name, String description, double price, int categoryId) {
+        this.name = name;
+        this.description = description;
+        this.price = price;
+        this.categoryId = categoryId;
+    }
+
     public Product(int id, String name, String description, double price) {
         this.id = id;
         this.name = name;
         this.description = description;
         this.price = price;
+    }
 
+    public Product(int id, String name, String description, double price, int categoryId) {
+        this.id = id;
+        this.name = name;
+        this.description = description;
+        this.price = price;
+        this.categoryId = categoryId;
     }
 
     public int getId() {
@@ -56,6 +71,22 @@ public class Product {
         this.price = price;
     }
 
+    public int getCategoryId() {
+        return categoryId;
+    }
+
+    public void setCategoryId(int categoryId) {
+        this.categoryId = categoryId;
+    }
+
+    public String getCategoryName() {
+        return categoryName;
+    }
+
+    public void setCategoryName(String categoryName) {
+        this.categoryName = categoryName;
+    }
+
     @Override
     public String toString() {
         return "Product{" +
@@ -63,6 +94,8 @@ public class Product {
                 ", name='" + name + '\'' +
                 ", description='" + description + '\'' +
                 ", price=" + price +
+                ", categoryId=" + categoryId +
+                ", categoryName='" + categoryName + '\'' +
                 '}';
     }
 }

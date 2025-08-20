@@ -1,17 +1,16 @@
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Thêm sản phẩm</title>
+    <title>Thêm danh mục</title>
     <style>
         body { font-family: Arial, sans-serif; margin: 20px; }
         .form-container { max-width: 500px; margin: 0 auto; padding: 20px; border: 1px solid #ddd; border-radius: 8px; }
         .form-group { margin-bottom: 15px; }
         label { display: block; margin-bottom: 5px; font-weight: bold; }
-        input[type="text"], input[type="number"], select, textarea { 
+        input[type="text"], textarea { 
             width: 100%; padding: 8px; border: 1px solid #ddd; border-radius: 4px; box-sizing: border-box; 
         }
-        select { height: 40px; }
+        textarea { height: 80px; resize: vertical; }
         .btn { 
             background-color: #4CAF50; color: white; padding: 10px 20px; 
             border: none; border-radius: 4px; cursor: pointer; margin-right: 10px;
@@ -32,37 +31,22 @@
 </div>
 
 <div class="form-container">
-    <h2>Thêm sản phẩm mới</h2>
-    <form action="/product?action=add" method="post">
+    <h2>Thêm danh mục mới</h2>
+    <form action="/category?action=add" method="post">
         <div class="form-group">
-            <label for="name">Tên sản phẩm:</label>
-            <input type="text" id="name" name="name" placeholder="Nhập tên sản phẩm" required>
+            <label for="name">Tên danh mục:</label>
+            <input type="text" id="name" name="name" placeholder="Nhập tên danh mục" required>
         </div>
         
         <div class="form-group">
             <label for="description">Mô tả:</label>
-            <textarea id="description" name="description" placeholder="Nhập mô tả sản phẩm"></textarea>
+            <textarea id="description" name="description" placeholder="Nhập mô tả danh mục"></textarea>
         </div>
         
-        <div class="form-group">
-            <label for="price">Giá ($):</label>
-            <input type="number" id="price" name="price" placeholder="Nhập giá sản phẩm" step="0.01" min="0" required>
-        </div>
-        
-        <div class="form-group">
-            <label for="categoryId">Danh mục:</label>
-            <select id="categoryId" name="categoryId">
-                <option value="">-- Chọn danh mục --</option>
-                <c:forEach var="category" items="${categories}">
-                    <option value="${category.getId()}">${category.getName()}</option>
-                </c:forEach>
-            </select>
-        </div>
-        
-        <button type="submit" class="btn">Thêm sản phẩm</button>
-        <a href="/product" class="btn btn-secondary">Hủy</a>
+        <button type="submit" class="btn">Thêm danh mục</button>
+        <a href="/category" class="btn btn-secondary">Hủy</a>
     </form>
 </div>
 
 </body>
-</html>
+</html> 
